@@ -1,0 +1,24 @@
+-- Define the admin code and user who can use it
+local adminCode = "yourSecretAdminCode" -- Replace with your desired code
+local targetUser = "IIIIIIIllIllIIllll" -- Replace with your username if needed
+
+-- Function to grant admin privileges
+local function grantAdmin(player)
+    if player.Name == targetUser then
+        -- Example of granting admin privileges
+        print(player.Name .. " is now an admin!")
+        -- Add your custom admin functionality here
+        player:SetAttribute("IsAdmin", true) -- Example attribute
+    else
+        warn("Unauthorized user tried to use admin code: " .. player.Name)
+    end
+end
+
+-- Listen for code input in the developer console
+game.Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(message)
+        if message == adminCode then
+            grantAdmin(player)
+        end
+    end)
+end)
